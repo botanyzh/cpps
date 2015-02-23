@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="cpps : A (pseudo) interpreter for C++ script">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>cpps</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/duyanning/cpps">View on GitHub</a>
+
+          <h1 id="project_title">cpps</h1>
+          <h2 id="project_tagline">A (pseudo) interpreter for C++ script</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/duyanning/cpps/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/duyanning/cpps/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="cpps---a-pseudo-interpreter-for-c-script" class="anchor" href="#cpps---a-pseudo-interpreter-for-c-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>CPPS - A (Pseudo) Interpreter for C++ Script</h1>
+
+<p>Note: There is also <a href="https://github.com/duyanning/cpps/blob/master/README.chinese.md">a Chinese version</a>.</p>
+
+<h2>
+<a id="build--install" class="anchor" href="#build--install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Build &amp; Install</h2>
+
+<pre><code>mkdir build-cpps
+cd build-cpps
+cmake ../cpps
+make
+make test
+sudo make install
+</code></pre>
+
+<h2>
+<a id="script-consisting-of-only-one-cpp-file" class="anchor" href="#script-consisting-of-only-one-cpp-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Script consisting of only one .cpp file</h2>
+
+<pre><code>cpps hello.cpp
+</code></pre>
+
+<h2>
+<a id="script-consisting-of-multiple-one-cpp-files" class="anchor" href="#script-consisting-of-multiple-one-cpp-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Script consisting of multiple one .cpp files</h2>
+
+<p>Such as:</p>
+
+<ul>
+<li>hello.cpp</li>
+<li>foo.cpp</li>
+<li>foo.h</li>
+</ul>
+
+<h3>
+<a id="if-you-use-a-traditional-approach-such-as-gcc--makefile" class="anchor" href="#if-you-use-a-traditional-approach-such-as-gcc--makefile" aria-hidden="true"><span class="octicon octicon-link"></span></a>If you use a traditional approach such as GCC &amp; Makefile</h3>
+
+<p>You need add a line such as</p>
+
+<pre><code>#include "foo.h"
+</code></pre>
+
+<p>to <code>hello.cpp</code> that calls functions defined in <code>foo.cpp</code> and declared in <code>foo.h</code>
+and then add rules for compiling <code>foo.cpp</code> to your Makefile.</p>
+
+<h3>
+<a id="if-you-use-cpps" class="anchor" href="#if-you-use-cpps" aria-hidden="true"><span class="octicon octicon-link"></span></a>If you use CPPS</h3>
+
+<p>What you need is to add a comment after the <code>#include "foo.h"</code> directive, such as</p>
+
+<pre><code>#include "foo.h" // usingcpp
+</code></pre>
+
+<p>and then run the following command:</p>
+
+<pre><code>cpps hello.cpp
+</code></pre>
+
+<p>NOTE: if your .cpp file has a different name than the corresponding .h file, you should write:</p>
+
+<pre><code>#include "foo.h" // using fooandbar.cpp
+</code></pre>
+
+<p>where <code>fooandbar.cpp</code> is the file in which the definations of functions declared in foo.h reside.</p>
+
+<h2>
+<a id="if-you-use-a-library-in-hellocpp" class="anchor" href="#if-you-use-a-library-in-hellocpp" aria-hidden="true"><span class="octicon octicon-link"></span></a>If you use a library in hello.cpp</h2>
+
+<p>such as pthread</p>
+
+<h3>
+<a id="if-you-use-a-traditional-approach-such-as-gcc--makefile-1" class="anchor" href="#if-you-use-a-traditional-approach-such-as-gcc--makefile-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>If you use a traditional approach such as GCC &amp; Makefile</h3>
+
+<p>You need write</p>
+
+<pre><code>g++ -lpthread hello.cpp -o hello
+</code></pre>
+
+<h3>
+<a id="if-you-ues-cpps" class="anchor" href="#if-you-ues-cpps" aria-hidden="true"><span class="octicon octicon-link"></span></a>If you ues CPPS</h3>
+
+<p>All you need to do is adding the following comment to any .cpp file of your script</p>
+
+<pre><code>// linklib pthread
+</code></pre>
+
+<h2>
+<a id="request-a-h-to-be-precompiled" class="anchor" href="#request-a-h-to-be-precompiled" aria-hidden="true"><span class="octicon octicon-link"></span></a>Request a .h to be precompiled</h2>
+
+<p>For example, if you want to make <code>std.h</code> a precompiled header,
+all you need to do is adding a comment after the <code>#include "std.h"</code> directive as following:</p>
+
+<pre><code>#include "std.h" // precompile
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">cpps maintained by <a href="https://github.com/duyanning">duyanning</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
